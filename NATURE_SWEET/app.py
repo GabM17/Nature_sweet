@@ -9,8 +9,7 @@ st.title("📊 Dashboard de Ventas")
 # ==============================
 # Cargar archivo
 # ==============================
-file_path = "/Users/gabrielmariscal/Desktop/NATURE_SWEET/Base de Datos NatureSweet Agrupada.xlsx"
-
+file_path = "Base de Datos NatureSweet Agrupada.xlsx"
 df = pd.read_excel(file_path, sheet_name="Agrupado")
 
 # ==============================
