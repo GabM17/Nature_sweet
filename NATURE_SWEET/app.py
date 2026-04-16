@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+import os
 
 st.set_page_config(layout="wide")
 
@@ -9,7 +10,25 @@ st.title("📊 Dashboard de Ventas")
 # ==============================
 # Cargar archivo
 # ==============================
-file_path = "Base de Datos NatureSweet Agrupada.xlsx"
+
+
+
+
+# 1. Obtenemos la ruta absoluta de la carpeta donde está este script (app.py)
+# Esto resuelve el problema de las subcarpetas en Streamlit Cloud
+base_path = os.path.dirname(__file__)
+
+# 2. Construimos la ruta al Excel de forma dinámica
+file_path = os.path.join(base_path, "Base de Datos NatureSweet Agrupada.xlsx")
+
+# 3. Cargamos el archivo
+try:
+    df = pd.read_excel(file_path, sheet_name="Agrupado")
+except FileNotFoundError:
+    # Este bloque es por si acaso algo falla, para que la app te diga qué ve el servidor
+    import streamlit as st
+    st.error(f"No encontré el archivo en: {file_path}")
+    st.write("Archivos disponibles en esta carpeta:", os.listdir(base_path))
 df = pd.read_excel(file_path, sheet_name="Agrupado")
 
 # ==============================
